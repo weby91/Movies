@@ -2,6 +2,8 @@ package com.webster.udacity.movies.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by webster on 09/07/17.
  */
@@ -35,7 +37,7 @@ public class MovieDetails {
     private String originalTitle;
 
     @SerializedName("genre_ids")
-    private long[] genreIds;
+    private List<Long> genreIds;
 
     @SerializedName("backdrop_path")
     private String backdropPath;
@@ -113,11 +115,11 @@ public class MovieDetails {
         return this.originalTitle;
     }
 
-    public void setGenreIds(final long[] genreIds) {
+    public void setGenreIds(final List<Long> genreIds) {
         this.genreIds = genreIds;
     }
 
-    public long[] getGenreIds() {
+    public List<Long> getGenreIds() {
         return this.genreIds;
     }
 

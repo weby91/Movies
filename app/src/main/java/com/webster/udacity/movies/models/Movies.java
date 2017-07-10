@@ -2,7 +2,7 @@ package com.webster.udacity.movies.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by webster on 09/07/17.
@@ -19,7 +19,7 @@ public class Movies {
     private long totalPages;
 
     @SerializedName("results")
-    private ArrayList<MovieDetails> results = new ArrayList<>();
+    private List<MovieDetails> results;
 
     public void setPage(final long page) {
         this.page = page;
@@ -45,11 +45,11 @@ public class Movies {
         return this.totalPages;
     }
 
-    public void setResults(final ArrayList<MovieDetails> results) {
+    public void setResults(final List<MovieDetails> results) {
         this.results = results;
     }
 
-    public ArrayList<MovieDetails> getResults() {
+    public List<MovieDetails> getResults() {
         return this.results;
     }
 }
