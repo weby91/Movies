@@ -2,42 +2,54 @@ package com.webster.udacity.movies;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.webster.udacity.movies.util.RecyclerAdapter;
-
-import java.util.ArrayList;
+import com.webster.udacity.movies.fragments.MainActivityFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
 
-    private void initViews(){
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.card_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+        setContentView(R.layout.fragment_container);
 
-        ArrayList androidVersions = prepareData();
-        RecyclerAdapter adapter = new RecyclerAdapter(getApplicationContext(),androidVersions);
-        recyclerView.setAdapter(adapter);
+        if(findViewById(R.id.flContainer) != null)
+        {
+            if(savedInstanceState != null)
+                return;
 
-    }
-
-    private ArrayList prepareData(){
-
-        ArrayList android_version = new ArrayList<>();
-        for(int i=0;i<android_version_names.length;i++){
-            AndroidVersion androidVersion = new AndroidVersion();
-            androidVersion.setAndroid_version_name(android_version_names[i]);
-            androidVersion.setAndroid_image_url(android_image_urls[i]);
-            android_version.add(androidVersion);
+            initUi();
         }
-        return android_version;
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_filter:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.flContainer, MainActivityFragment.newInstance(null)).commit();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    private void initUi() {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flContainer, MainActivityFragment.newInstance(null)).commit();
     }
 }
